@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+
+<div class="container  col-md-12">
+    <script>
+
+
+    </script>
+
+    <div class="row  ">
+        <div class="col-md-6 ">
+            <form method="POST" class="p-3 shadow" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" type="text" name="mname" placeholder="Enter Tournament Name">
+                    <input class="form-control" type="text" name="team1" placeholder="Enter first Team Name">
+                    <input class="form-control" type="file" name="icon">
+                    <input class="form-control" type="text" name="team2" placeholder="Enter Second Team Name">
+                    <input class="form-control" type="file" name="icons">
+                    <input class="form-control" type="text" name="venue" placeholder="Enter venue">
+                    <input class="form-control" type="text" name="time" placeholder="Enter match time">
+                    <input class="form-control" type="date" name="date" placeholder="Enter match date">
+                    <input class="form-control" type="text" name="mcount" placeholder="enter match number">
+
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success " type="submit">Add</button>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="col-md-6">
+            <h3>todays matches</h3>
+            {% for i in det %}
+            <div class="card shadow  ">
+                <div class="card">
+
+                    <h3 class="title">{{i.mname}}</h3>
+                    <h4 class="title">{{i.date}}</h4>
+                    <h6>Match NO:{{i.mcout}}</h6>
+                    <div class="row" style="position:relative; left:100px;">
+                        <div class="col-md-5">
+                            <p style="font-size:40px;"><b>{{i.teams}}</b></p>
+                            <img src="{{i.icon1.url}}" width="50px;" height="50px;">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" value="mik" id="vs">
+                            <b>VS</b>
+
+                        </div>
+                        <div class="col-md-5">
+
+                            <p style="font-size:40px;"><b>{{i.team2}}</b></p>
+                            <img src="{{i.icon2.url}}" width="50px;" height="50px;">
+
+
+                        </div>
+                    </div>
+
+                    <input type="text" value="all" id="no">
+<!--                    new content-->
+
+  <input type="button" onclick="myFunction()" value="-->">
+  <input type="text" id="result" size="20">
+</form>
+
+<script>
+function myFunction() {
+  var no = document.getElementById("no").value;
+  var p=10
+  var c =no + p
+
+  var txt = document.getElementById("result").value;
+  txt = txt + c;
+  document.getElementById("result").value = txt;
+}
+</script>
+<!--it ends-->
+                    <p>Time:{{i.time}}</p>
+                    <button class="btn btn-info"><a href="{%url 'todoapp:delete' i.id %}">Delete</a></button>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
